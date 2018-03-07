@@ -3,7 +3,7 @@ This project is a simple user management application. This applications is being
 In pom.xml we have used Spring-boot for importing all spring dependency jars.
 
 1. spring-boot-starter-data-jpa for Spring JPA Hibernate dependency.
-2. spring-boot-starter-security for using Spring Security
+2. spring-boot-starter-security for using Spring Security.
 3. spring-boot-starter-web for Spring MVC
 4. spring-security-taglibs
 
