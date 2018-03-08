@@ -3,8 +3,8 @@ node {
     def TASK_FAMILY
     def TASK_REVISION
     def DESIRED_COUNT
-	git url: 'https://github.com/debgmail/SpringMvcSecurity.git'
-	stage('checkout'){  
+    git url: 'https://github.com/debgmail/SpringMvcSecurity.git'
+    stage('checkout'){  
        sh "rm -rf $WORKSPACE/*"	   
        checkout scm
     }
@@ -16,11 +16,11 @@ node {
       sh "docker pull 085396960228.dkr.ecr.us-east-1.amazonaws.com/myrepo:latest"
       sh "echo '-------preparation end--------------------------'"
     }
-    stage('register task')
+    stage('Register task')
     {
         sh "/var/lib/jenkins/.local/bin/aws ecs register-task-definition --cli-input-json file://$WORKSPACE/config/myrepo-default-cluster.json"
     }
-    stage('task definition')
+    stage('Run Service')
     {
         sh '''
            TASK_FAMILY='first-run-task-defination'
