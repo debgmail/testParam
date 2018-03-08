@@ -6,6 +6,7 @@ node {
    mvnHome =  tool 'M3'
    stage('checkout/preparation')
    {  
+       sh "rm -rf $WORKSPACE/*"	   
        checkout scm
    }
    stage('build') {
