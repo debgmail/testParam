@@ -18,7 +18,7 @@ node {
     }
     stage('register task')
     {
-        sh "/var/lib/jenkins/.local/bin/aws ecs register-task-definition --cli-input-json file://$WORKSPACE/myrepo-default-cluster.json"
+        sh "/var/lib/jenkins/.local/bin/aws ecs register-task-definition --cli-input-json file://$WORKSPACE/config/myrepo-default-cluster.json"
     }
     stage('task definition')
     {
