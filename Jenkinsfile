@@ -40,8 +40,8 @@ node {
        sh """
          echo 'hello4'
          reg=\"${params.AWS_REGION_PARAM}\"
-	 echo 'hel1'
-         var=`/var/lib/jenkins/.local/bin/aws ecr get-login --no-include-email --region \"${reg}\"`
+	 echo \$reg
+         var=`/var/lib/jenkins/.local/bin/aws ecr get-login --no-include-email --region \$reg`
 	 echo 'hello5'
          eval \$var
 	 echo 'hello6' 
