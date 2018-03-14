@@ -2,6 +2,7 @@ node {
    echo 'Hello World'
    def mvnHome
    def var
+  def reg
    properties([parameters([string(defaultValue: 'https://github.com/debgmail/testParam.git', description: 'git URL for code repository', name: 'URL_PARAM', trim: false), string(defaultValue: 'ecs-myrepo-service', description: 'ECS service name for cluster deployment ', name: 'ECS_SRV_NAME_PARAM', trim: false), string(defaultValue: 'myrepo', description: 'ECS repository name', name: 'ECS_REPO_PARAM', trim: false), string(defaultValue: 'us-east-1', description: 'AWS region where ECS service is created', name: 'AWS_REGION_PARAM', trim: false), string(defaultValue: 'outputs3jenkins', description: 'S3 bucket where build war file will be stored.', name: 'OUT_BUCKET_PARAM', trim: false), string(defaultValue: '085396960228', description: 'AWS account ID', name: 'AWS_ACCOUNT', trim: false)]), pipelineTriggers([githubPush()])])
    echo 'Hello1'
    git url: "${params.URL_PARAM}"
@@ -31,12 +32,14 @@ node {
       sh "docker build -t ${params.ECS_REPO_PARAM} --rm=true ."
     }
     stage ('Docker push') {
+       reg=${params.AWS_REGION_PARAM}
+       repo="${params.ECS_REPO_PARAM}"
+       id="${params.AWS_ACCOUNT}"
        sh '''
-         def reg="${params.AWS_REGION_PARAM}"
          var=`/var/lib/jenkins/.local/bin/aws ecr get-login --no-include-email --region ${reg}`
          eval $var
-         repo="${params.ECS_REPO_PARAM}"
-	 id="${params.AWS_ACCOUNT}"
+ //        repo="${params.ECS_REPO_PARAM}"
+//	 id="${params.AWS_ACCOUNT}"
          docker tag ${repo}:latest ${id}.dkr.ecr.us-east-1.amazonaws.com/${repo}:latest
          docker push ${id}.dkr.ecr."${params.AWS_REGION_PARAM}".amazonaws.com/${repo}:latest
        '''
