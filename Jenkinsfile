@@ -38,9 +38,12 @@ node {
        sh "repo=${params.ECS_REPO_PARAM}"
        sh "id=${params.AWS_ACCOUNT}"
        sh '''
+         echo "hello4"
  //        reg="${params.AWS_REGION_PARAM}"
-         var=`/var/lib/jenkins/.local/bin/aws ecr get-login --no-include-email --region ${reg}`
+         var=`/var/lib/jenkins/.local/bin/aws ecr get-login --no-include-email --region "${reg}"`
+	 echo "hello5"
          eval $var
+	 echo "hello6"
  //        repo="${params.ECS_REPO_PARAM}"
 //	 id="${params.AWS_ACCOUNT}"
 //         docker tag ${repo}:latest ${id}.dkr.ecr.us-east-1.amazonaws.com/${repo}:latest
