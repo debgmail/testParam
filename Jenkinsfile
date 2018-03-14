@@ -32,12 +32,13 @@ node {
       sh "docker build -t ${params.ECS_REPO_PARAM} --rm=true ."
     }
     stage ('Docker push') {
-       sh "reg=${params.AWS_REGION_PARAM}"
        sh "echo 'hello2'"
+       sh "reg=${params.AWS_REGION_PARAM}"
+       sh "echo 'hello3'"
        sh "repo=${params.ECS_REPO_PARAM}"
        sh "id=${params.AWS_ACCOUNT}"
        sh '''
-         reg="${params.AWS_REGION_PARAM}"
+ //        reg="${params.AWS_REGION_PARAM}"
          var=`/var/lib/jenkins/.local/bin/aws ecr get-login --no-include-email --region ${reg}`
          eval $var
  //        repo="${params.ECS_REPO_PARAM}"
