@@ -32,10 +32,11 @@ node {
     }
     stage ('Docker push') {
        sh '''
-         "var=`/var/lib/jenkins/.local/bin/aws ecr get-login --no-include-email --region ${params.AWS_REGION_PARAM}`"
+         def reg="${params.AWS_REGION_PARAM}"
+         var=`/var/lib/jenkins/.local/bin/aws ecr get-login --no-include-email --region ${reg}`
          eval $var
-		 repo="${params.ECS_REPO_PARAM}"
-		 id="${params.AWS_ACCOUNT}"
+         repo="${params.ECS_REPO_PARAM}"
+	 id="${params.AWS_ACCOUNT}"
          docker tag ${repo}:latest ${id}.dkr.ecr.us-east-1.amazonaws.com/${repo}:latest
          docker push ${id}.dkr.ecr."${params.AWS_REGION_PARAM}".amazonaws.com/${repo}:latest
        '''
