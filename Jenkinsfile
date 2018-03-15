@@ -45,8 +45,8 @@ node {
          var=`/var/lib/jenkins/.local/bin/aws ecr get-login --no-include-email --region \$reg`
          eval \$var
 	 docker tag \$repo:latest \$id.dkr.ecr.\$reg.amazonaws.com/\$repo:latest
-//	 docker push ${id}.dkr.ecr.${reg}.amazonaws.com/${repo}:latest
-//       """
+	 docker push \$id.dkr.ecr.\$reg.amazonaws.com/\$repo:latest
+       """
   }
     
 }
