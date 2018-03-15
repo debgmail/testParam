@@ -40,19 +40,14 @@ node {
        sh """
          echo 'hello4'
          reg=\"${params.AWS_REGION_PARAM}\"
+	 repo=\"${params.ECS_REPO_PARAM}\"
+	 id=\"${params.AWS_ACCOUNT}\"
 	 echo \$reg
          var=`/var/lib/jenkins/.local/bin/aws ecr get-login --no-include-email --region \$reg`
-	 echo 'hello5'
          eval \$var
-	 echo 'hello6' 
+	 docker tag ${repo}:latest ${id}.dkr.ecr.us-east-1.amazonaws.com/${repo}:latest
+	 docker push ${id}.dkr.ecr.${reg}.amazonaws.com/${repo}:latest
        """
- //        repo="${params.ECS_REPO_PARAM}"
-//	 id="${params.AWS_ACCOUNT}"
-//         docker tag ${repo}:latest ${id}.dkr.ecr.us-east-1.amazonaws.com/${repo}:latest
-//         docker push ${id}.dkr.ecr."${params.AWS_REGION_PARAM}".amazonaws.com/${repo}:latest
-       
-    //   docker.withRegistry('https://085396960228.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:demo-ecr-credential')
-    //   docker.image('myrepo').push('latest')
   }
     
 }
