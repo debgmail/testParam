@@ -1,5 +1,5 @@
 node {
-   echo 'Hello World'
+   echo 'Hello World**'
    def mvnHome
    def var
    def reg
